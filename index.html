@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>网页抽奖程序</title>
+        <link rel="stylesheet" type="text/css" href="{{static_url('css/style.css')}}" />
+        <link rel="icon" href="{{static_url('res/icon-dog.png')}}" sizes="32x32"/>
+    </head>
+    <body bgcolor= #85c1e9 >
+        <form action="/list" method="post" class="elegant-aero">
+            <h1>网页抽奖程序</h1>
+            <label>
+                <span>参与人员名单:</span>
+                <textarea name="namelist" placeholder="Input the list of names..." required></textarea>
+            </label>
+            <label>
+                <span>一等奖人数：</span>
+                <input type="text" name="firstnum" required pattern="[0-9]+" onkeydown="if(event.keyCode==13)event.keyCode=9" autocomplete="off">
+            </label>
+            <label>
+                <span>二等奖人数：</span>
+                <input type="text" name="secondnum" required pattern="[0-9]+" onkeydown="if(event.keyCode==13)event.keyCode=9" autocomplete="off">
+            </label>
+            <label>
+                <span>三等奖人数：</span>
+                <input type="text" name="thirdnum" required pattern="[0-9]+" onkeydown="if(event.keyCode==13)event.keyCode=9" autocomplete="off">
+            </label>
+            <label>
+                <span>&nbsp;</span>
+                <input type="submit" value="Submit">&emsp;&emsp;<input type="reset" value="Reset">
+            </label>
+        </form>
+        <script type="text/javascript">
+            var flag={{flag}}
+            if (flag==1) {
+                alert("所有奖项总人数超过名单人数！");
+            }
+        </script>
+    </body>
+</html>

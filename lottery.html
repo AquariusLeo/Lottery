@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>网页抽奖程序</title>
+        <link rel="stylesheet" type="text/css" href="{{static_url('css/style.css')}}" />
+        <link rel="icon" href="{{static_url('res/icon-dog.png')}}" sizes="32x32"/>
+    </head>
+    <body bgcolor= #85c1e9 >
+        <form name="myform" action="/lottery" method="POST" onsubmit="return inputCheck()" class="elegant-aero">
+            <h1>网页抽奖程序</h1>
+            <label><hr/><br>
+                参与总人数：{{totalnum}}人&emsp;未中奖人数：{{remainnum}}人<br>
+                一等奖剩余人数：{{firstnum}}人<br>
+                二等奖剩余人数：{{secondnum}}人<br>
+                三等奖剩余人数：{{thirdnum}}人<br><br>
+                <hr/>
+            </label>
+            <label>
+                <span>奖项选择：<br><br></span>
+                <input type="radio" name="price" value="first" required>一等奖<br>
+                <input type="radio" name="price" value="second" required>二等奖<br>
+                <input type="radio" name="price" value="third" required>三等奖<br>
+            </label>
+            <label>
+                <span>抽取人数：<br></span>
+                <input type="text" name="num" required pattern="[1-9][0-9]*" autocomplete="off"><br>
+            </label>
+            <label>
+                <div align="center">
+                    <input type="submit" value="抽取">
+                </div>
+            </label>
+        </form>
+        {% if flag==True %}
+            <div class="center">
+                <p>中奖名单</p>
+                {% for item in winnerlist %}
+                    {{item}}<br>
+                {% end %}
+                <br>
+            </div>
+        {% end %}
+
+        <script type="text/javascript">
+            function inputCheck(){
+                if (document.forms["myform"]["price"].value=="first"){
+                    var x=document.forms["myform"]["num"].value;
+                    if (x > {{firstnum}}){
+                        alert("一等奖人数超出！");
+                        return false;
+                    }
+                }
+                else if (document.forms["myform"]["price"].value=="second"){
+                    var x=document.forms["myform"]["num"].value;
+                    if (x > {{secondnum}}){
+                        alert("二等奖人数超出！");
+                        return false;
+                    }
+                }
+                else if (document.forms["myform"]["price"].value=="third"){
+                    var x=document.forms["myform"]["num"].value;
+                    if (x > {{thirdnum}}){
+                        alert("三等奖人数超出！");
+                        return false;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
